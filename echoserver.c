@@ -1,4 +1,4 @@
-//3-4
+//3-6
 #include <stdio.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -47,10 +47,9 @@ int main(){
 		//클라이언트의 요청이 오면 허용(accept)해 주고, 해당 클라이언트와 통신할 수 있도록 클라이언트 소켓(c_socket)을 반환함.
 		printf("/client is connected\n");
 		printf("클라이언트 접속 허용\n");
-		read(c_socket, rcvbuffer, sizeof(rcvbuffer));
-		printf("recbuffer: %s\n",rcvbuffer);
-		n = strlen(buffer);
-		write(c_socket, buffer, n); //클라이언트에게 buffer의 내용을 전송함
+		n=read(c_socket, rcvbuffer, sizeof(rcvbuffer));
+		printf("rcvbuffer: %s\n",rcvbuffer);
+		write(c_socket, rcvbuffer, n); //클라이언트에게 buffer의 내용을 전송함
 
 		close(c_socket);
 	}
