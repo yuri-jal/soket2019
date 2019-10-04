@@ -6,7 +6,8 @@
 
 #define PORT 10000
 
-char buffer[100] = "안녕하세요. 만나서 반가워요.\n";
+char buffer[100] = "내 이름은 김유리야\n";
+char bufferer[100] = "내 이름은 24살이야\n";
 char rcvbuffer[100];
 int main(){
 	int c_socket, s_socket;
@@ -48,8 +49,9 @@ int main(){
 		printf("/client is connected\n");
 		printf("클라이언트 접속 허용\n");
 			n=read(c_socket, rcvbuffer, sizeof(rcvbuffer));
-			
 			write(c_socket, buffer); //클라이언트에게 buffer의 내용을 전송함
+			n=read(c_socket, rcvbuffer, sizeof(rcvbuffer));
+			write(c_socket, bufferer);
 		close(c_socket);
 	}
 	close(s_socket);

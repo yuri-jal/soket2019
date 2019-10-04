@@ -12,7 +12,7 @@
 int main(){
 	int c_socket; 
 	struct sockaddr_in c_addr;
-	int n;
+	int n,i=0;
 	char rcvBuffer[BUFSIZE];//서버에서 보내준 메세지를 저장하는 변수
 	char sendbuffer[BUFSIZE]="안녕하세요";
 	//1. 클라이언트 소켓 생성
@@ -30,6 +30,7 @@ int main(){
 		close(c_socket); //자원 회수
 		return -1;  //프로세스 종료
 	}
+	while(i<2){
 	//4. 서버에 메시지 보낼때 키보드로부터 메세지 입력 받기
 		fgets(sendbuffer, sizeof(sendbuffer),stdin);
 		//5. 서버에 메시지 주기
@@ -46,8 +47,9 @@ int main(){
 		}
 		rcvBuffer[n] = '\0'; //문자열 뒷부분 깨짐 방지
 		printf("received data: %s\n", rcvBuffer); //서버에서 받은 메세지 출력
-		close(c_socket);
-
+		i++;
+	}
+	close(c_socket);
 	return 0;	
 }
 
