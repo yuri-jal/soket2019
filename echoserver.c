@@ -4,16 +4,18 @@
 #include <sys/socket.h>
 #include <string.h>
 
+
 #define PORT 10000
 
-char buffer[100] = "내 이름은 김유리야\n";
-char bufferer[100] = "내 이름은 24살이야\n";
+
 char rcvbuffer[100];
-int main(){
+
+int main(void){
 	int c_socket, s_socket;
 	struct sockaddr_in s_addr, c_addr;
-	int len;
 	int n;
+	int len;
+	int c_socket_size;	
 	
 
 	// 1. 서버 소켓 생성
@@ -48,10 +50,9 @@ int main(){
 		//클라이언트의 요청이 오면 허용(accept)해 주고, 해당 클라이언트와 통신할 수 있도록 클라이언트 소켓(c_socket)을 반환함.
 		printf("/client is connected\n");
 		printf("클라이언트 접속 허용\n");
-			n=read(c_socket, rcvbuffer, sizeof(rcvbuffer));
-			write(c_socket, buffer); //클라이언트에게 buffer의 내용을 전송함
-			n=read(c_socket, rcvbuffer, sizeof(rcvbuffer));
-			write(c_socket, bufferer);
+		n=read(c_socket,rcvbuffer,sizeof(rcvbuffer));
+		write(c_socket,rcvbuffer,n);
+		
 		close(c_socket);
 	}
 	close(s_socket);
